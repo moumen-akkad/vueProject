@@ -5,10 +5,16 @@ import DigitalInterfaces from "../views/DigitalInterfaces.vue";
 import BusinessReportFigures from "../views/BusinessReportFigures.vue";
 import CompanyGovernance from "../views/CompanyGovernance.vue";
 import NotFound from "../views/NotFound.vue";
+import HomeView from "../views/HomeView.vue";
 
 export default createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: "/",
+      name: 'home',
+      component: HomeView
+    },
     {
       path: "/company/id",
       name: "companyId",
