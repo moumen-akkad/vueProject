@@ -5,6 +5,7 @@
 
   <main class="p-4">
     <RouterView companyId />
+    
   </main>
 </template>
 
