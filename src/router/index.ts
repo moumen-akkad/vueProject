@@ -46,5 +46,8 @@ export default createRouter({
       name: 'NotFound',
       component: NotFound
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 });
