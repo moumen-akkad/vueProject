@@ -1,7 +1,5 @@
 <template>
-  <header class="p-4 bg-gray-800 text-white">
-    Header
-  </header>
+  <Header></Header>
 
   <main class="p-4">
     <RouterView  />
@@ -10,4 +8,5 @@
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import Header from './components/Header.vue';
 </script>
