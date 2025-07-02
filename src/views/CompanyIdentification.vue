@@ -2,12 +2,10 @@
   <section class="p-6 max-w-2xl mx-auto space-y-6 bg-white rounded shadow">
     <h1 class="text-2xl font-bold text-gray-800">Company Identification</h1>
 
-    <!-- Grouped Fields -->
     <div class="space-y-6">
-      <!-- Company Info -->
       <div class="space-y-4">
         <FormField label="Company Name *" tip="The legal name under which the company operates. Required.">
-          <input type="text" class="w-full border rounded px-3 py-2" />
+          <input v-model="form.companyName" type="text" class="w-full border rounded px-3 py-2" />
         </FormField>
 
         <FormField label="Company Logo" tip="Optional. Upload a logo in .png or .jpg format.">
@@ -25,7 +23,6 @@
 
       <hr />
 
-      <!-- Legal & Tax Info -->
       <div class="space-y-4">
         <FormField label="VAT Number" tip="Optional. Required for EU VAT transactions.">
           <input type="text" class="w-full border rounded px-3 py-2" />
@@ -46,7 +43,6 @@
 
       <hr />
 
-      <!-- Business Details -->
       <div class="space-y-4">
         <FormField label="Founding Year" tip="Optional. Year the company was established (e.g., 1998).">
           <input type="number" class="w-full border rounded px-3 py-2" />
@@ -72,15 +68,14 @@
       </div>
     </div>
 
-    <!-- Navigation Buttons -->
     <div class="flex justify-between pt-4">
       <RouterLink to="/" class="bg-gray-500 text-white px-5 py-2 rounded hover:bg-gray-600 transition">
         Previous
       </RouterLink>
-      <RouterLink to="/company/banks"
+      <button @click="saveAndNext"
         class="bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700 transition">
         Next
-      </RouterLink>
+      </button>
     </div>
   </section>
 </template>
@@ -88,4 +83,29 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
 import FormField from "../components/FormField.vue";
+import { reactive } from 'vue'
+import { useFormStore } from '@/stores/formData'
+import router from "../router/index";
+
+const store = useFormStore()
+
+const form = reactive({
+  companyName: '',
+  log: '',
+  description: '',
+  homepage: '',
+  vatNumber: '',
+  taxNumber: '',
+  duns: '',
+  commercialRegisterNumber: '',
+  foundingYear: '',
+  currency: '',
+  productGroups: '',
+  industries: ''
+})
+
+function saveAndNext(){
+  store.updateSection('company', {...form})
+  router.push('/company/banks')
+}
 </script>

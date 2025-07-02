@@ -42,11 +42,24 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
-import FormField from "@/components/FormField.vue";
+import { useFormStore } from '@/stores/formData'
+import { RouterLink } from 'vue-router'
+import FormField from '@/components/FormField.vue'
 
-// Placeholder save method
+const store = useFormStore()
+
 function save() {
-    console.log("Saved governance data.");
+  const jsonData = store.getFinalJson()
+  const blob = new Blob([JSON.stringify(jsonData, null, 2)], {
+    type: 'application/json'
+  })
+
+  const url = URL.createObjectURL(blob)
+
+  // Open in new tab
+  window.open(url, '_blank')
+
+  // Optional: cleanup
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 </script>
